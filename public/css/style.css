@@ -1,0 +1,179 @@
+
+* {
+    box-sizing: border-box;
+}
+body {
+   
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    text-align: center;
+}
+
+.container {
+    width: auto; 
+    min-width: 500px; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 20px; 
+    box-sizing: border-box; 
+    background: #fff; 
+    border-radius: 8px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    text-align: center;
+    margin: 20px;
+}
+
+
+
+nav {
+    margin-top: 10px;
+}
+
+nav a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    margin: 0 5px;
+}
+
+nav .active {
+    color: blue;
+}
+
+.login-box {
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    
+}
+
+h2 {
+    margin-bottom: 15px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+label {
+    text-align: left;
+    width: 100%;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+input {
+    width: 500px;
+    padding: 8px;
+    
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.error {
+    margin-top: 0;
+    color: red;
+    text-align: left ;
+}
+.remember {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.remember input {
+    margin-right: 5px;
+    width: auto;
+}
+
+.forgot {
+    text-decoration: none;
+    color: blue;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+.button-container {
+    width: 100%;
+    display: flex;
+    align-items: end; 
+    justify-content: space-between; 
+}
+button {
+    background-color: blue;
+    color: white;
+    padding: 10px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100px;
+}
+.index-button {
+   width:50px  !important;
+   margin: 5px;
+}
+
+footer {
+    margin-top: 20px;
+    font-size: 12px;
+    color: gray;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+table th,
+table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+table tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* Pagination Styles */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    padding: 8px 12px;
+    margin: 0 5px;
+    text-decoration: none;
+    color: blue;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.pagination a.active {
+    background-color: blue;
+    color: white;
+    border-color: blue;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #f4f4f4;
+}
