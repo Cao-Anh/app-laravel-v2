@@ -2,21 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\API\BaseController;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
-class UserController extends Controller
+class UserController extends BaseController
 {   
     public function isAuth($id)
     {
         $isAuth = Auth::user()->role == "admin"|| Auth::user()->id== $id;
         return $isAuth;
     }
+
+    public function getUsers()
+    {
+        $users = User::paginate(10)->toArray();
+        return $this->sendResponse($users, 'Users retrieved successfully.');
+    }
+
     public function index()
     {
-        $users = User::paginate(10);
-        return view('users.index', compact('users'));
+        return view('users.index');
     }
 
     public function show($id)
