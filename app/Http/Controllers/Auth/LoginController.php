@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -25,7 +23,7 @@ class LoginController extends Controller
         $credentials = ['email' => $request->email, 'password' => $request->password];
 
         if (Auth::attempt($credentials, $request->remember)) {
-            session()->regenerate();
+            // session()->regenerate();
             return redirect()->route('users.index')->with('success', 'Đăng nhập thành công!');
         }
 

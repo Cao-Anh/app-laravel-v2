@@ -29,7 +29,7 @@
         function fetchUsers(url) {
             fetch(url, {
                 headers: {
-                    'Authorization': 'Bearer YOUR_ACCESS_TOKEN' // Thay bằng token thực tế
+                    'Authorization': 'Bearer 3|AclOIfikLLybZ5KkYQePrJLzEQ6w1dUdzuzTI2RMc292b68f' // Thay bằng token thực tế
                 }
             })
             .then(response => response.json())
