@@ -7,44 +7,44 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends BaseController
 {
-    public function isAuth($id): bool
+    public function isAuth($authUser,$id): bool
     {
-        return Auth::user()->role == "admin" || Auth::user()->id == $id;
+        return $authUser->role == "admin" || $authUser->id == $id;
     }
 
     public function index(): JsonResponse
     {
         $users = User::paginate(10);
-        return response()->json(['users' => $users]);
+        return $this->sendResponse($users,'fetched users successfully');
     }
 
     public function show($id): JsonResponse
     {
         $user = User::findOrFail($id);
-        return response()->json(['user' => $user]);
-    }
-
-    public function edit($id): JsonResponse
-    {
-        if (!$this->isAuth($id)) {
-            return response()->json(['error' => 'Bạn không thể chỉnh sửa người dùng này.'], 403);
-        }
-
-        $user = User::findOrFail($id);
-        return response()->json(['user' => $user]);
+        return $this->sendResponse($user,'fetched users successfully');
     }
 
     public function update(Request $request, $id): JsonResponse
     {
-        $request->validate([
+        $authUser=$request->user();
+        if (!$this->isAuth($authUser,$id)) {
+            return $this->sendError(['Unauthorised' => 'Bạn không thể chỉnh sửa người dùng này.'], 403);
+        }
+        $validator = Validator::make($request->all(), [
             'username' => 'required|string|min:3|max:8',
             'email' => 'required|email|unique:users,email,' . $id,
             'description' => 'nullable|string',
             'photo' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048'
+            
         ]);
+   
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors());       
+        }
 
         $user = User::findOrFail($id);
 
@@ -61,13 +61,16 @@ class UserController extends BaseController
             'description' => $request->description,
         ]);
 
-        return response()->json(['message' => 'Cập nhật thành công.', 'user' => $user]);
+        // return $this->sendResponse($user, 'Updated successfully');
+        return $this->sendResponse($user, $authUser);
+
     }
 
     public function destroy(Request $request, $id): JsonResponse
     {
-        if (!$this->isAuth($id)) {
-            return response()->json(['error' => 'Bạn không thể xóa người dùng này.'], 403);
+        $authUser=$request->user();
+        if (!$this->isAuth($authUser,$id)) {
+            return $this->sendError(['Unauthorised' => 'Bạn không thể xóa người dùng này.'], 403);
         }
 
         $user = User::findOrFail($id);
